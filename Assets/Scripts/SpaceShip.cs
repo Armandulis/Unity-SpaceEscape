@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpaceShip : MonoBehaviour
 {
+    public int speed = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,8 @@ public class SpaceShip : MonoBehaviour
         float v = Input.GetAxisRaw( "Vertical" );
         
         Vector2 position = transform.position;
-        position.x += h * Time.deltaTime * 10;
-        position.y += v * Time.deltaTime * 10;
+        position.x += h * Time.deltaTime * speed;
+        position.y += v * Time.deltaTime * speed;
 
         transform.position = position;
 
