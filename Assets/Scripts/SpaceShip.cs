@@ -30,7 +30,7 @@ public class SpaceShip : MonoBehaviour
         transform.position = position;
 
         // Check if player position is valid
-        Vector3 poss = Camera.main.WorldToViewportPoint(transform.position);
+        Vector2 poss = Camera.main.WorldToViewportPoint(transform.position);
  
         // If Position is outside of camera, correct player's position
         Vector2 correctedPosition = transform.position;
