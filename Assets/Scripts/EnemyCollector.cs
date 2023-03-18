@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCole : MonoBehaviour
+public class EnemyCollector : MonoBehaviour
 {
+    private const string ENEMY_TAG = "Enemy";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,12 @@ public class EnemyCole : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if( other.CompareTag(ENEMY_TAG) )
+        {
+            Object.Destroy(other.gameObject );
+        }
     }
 }

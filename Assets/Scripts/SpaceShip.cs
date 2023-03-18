@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpaceShip : MonoBehaviour
 {
+    public GameObject explosion;
+    private const string ENEMY_TAG = "Enemy";
     public int speed = 5;
     // Start is called before the first frame update
     void Start()
@@ -21,14 +23,28 @@ public class SpaceShip : MonoBehaviour
         Vector2 originalPosition = transform.position;
 
         // Place Player on new position
-        float h = Input.GetAxisRaw( "Horizontal" );
-        float v = Input.GetAxisRaw( "Vertical" );
-        
-        Vector2 position = transform.position;
-        position.x += h * Time.deltaTime * speed;
-        position.y += v * Time.deltaTime * speed;
+        if (Input.touchCount > 0)
+        {
+             Vector2 targetPosition = transform.position;
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
+            {
+                targetPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            }
+                Vector2 position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                transform.position = position;
+        }
+        else
+        {
+             float h = Input.GetAxisRaw( "Horizontal" );
+            float v = Input.GetAxisRaw( "Vertical" );
+            
+            Vector2 position = transform.position;
+            position.x += h * Time.deltaTime * speed;
+            position.y += v * Time.deltaTime * speed;
 
-        transform.position = position;
+            transform.position = position;
+        }
 
         // Check if player position is valid
         Vector2 poss = Camera.main.WorldToViewportPoint(transform.position);
@@ -45,5 +61,15 @@ public class SpaceShip : MonoBehaviour
         }
     
         transform.position = correctedPosition;
+   }
+
+   private void OnTriggerEnter2D(Collider2D other) {
+    GameObject explosion = Instantiate( this.explosion );
+    explosion.transform.position = transform.position;
+    if( other.CompareTag( ENEMY_TAG ) )
+    {
+        Destroy(gameObject);
+    }
+    
    }
 }
