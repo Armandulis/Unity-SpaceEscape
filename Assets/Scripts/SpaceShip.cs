@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpaceShip : MonoBehaviour
 {
+    private bool canMove = true;
     public GameObject explosion;
     private const string ENEMY_TAG = "Enemy";
     public int speed = 5;
@@ -15,7 +17,10 @@ public class SpaceShip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updatePosition();
+        if( canMove)
+        {
+            updatePosition();
+        }
     }
 
     public void updatePosition()
@@ -68,8 +73,15 @@ public class SpaceShip : MonoBehaviour
     explosion.transform.position = transform.position;
     if( other.CompareTag( ENEMY_TAG ) )
     {
-        Destroy(gameObject);
+        canMove = false;
+        gameObject.SetActive( false );
+        Destroy(gameObject, 3);
     }
     
+   }
+
+   private void OnDestroy() {
+    
+        SceneManager.LoadScene("MainMenu");
    }
 }

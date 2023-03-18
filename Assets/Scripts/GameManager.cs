@@ -5,13 +5,30 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public int highScore = 0;
+    public float spawnSpeed = 1;
     private GameObject player;
     public int score = 0;
     public TextMeshProUGUI scoreBoardText;
+
+    public static GameManager instance;
+
+    private void Awake() {
+        if( !instance )
+        {
+            instance = this;
+            DontDestroyOnLoad( gameObject );
+        }
+        else
+        {
+            Destroy( gameObject );
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag( "Player" );
         StartCoroutine( CalculateScore() );
     }
 
@@ -19,6 +36,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+        player = GameObject.FindWithTag( "Player" );
+        
+        scoreBoardText = GameObject.FindObjectsOfType<TextMeshProUGUI>()[1];
     }
 
      IEnumerator CalculateScore()
@@ -31,6 +51,10 @@ public class GameManager : MonoBehaviour
 
              score++;    
             scoreBoardText.text = score.ToString();
+                if(score > highScore )
+                {
+                    highScore = score;
+                }
             }
         }
     }

@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while( true )
         {
-            yield return new WaitForSeconds( 1 );
+            yield return new WaitForSeconds( GameManager.instance.spawnSpeed );
 
             int enemyIndex = Random.Range( 0, enemiesList.Length );
             GameObject spawnedEnemy = Instantiate( enemiesList[ enemyIndex ] );
