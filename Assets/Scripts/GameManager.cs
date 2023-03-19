@@ -5,6 +5,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    
+    public AudioSource audioData;
+
     public int highScore = 0;
     public float spawnSpeed = 1;
     private GameObject player;
@@ -55,7 +58,16 @@ public class GameManager : MonoBehaviour
                 {
                     highScore = score;
                 }
-            }
+            }  else
+        {
+            score = 0;
         }
+        }
+    }
+
+    public void PlayExplotionSound()
+    {
+        // Instantiate( audioData );
+        // audioData.Play();
     }
 }

@@ -220,6 +220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608969d7168cf9046840cb8900d3dc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionAudio: {fileID: 0}
+  explosion: {fileID: 8536726102044196509, guid: c5623889487c2d14189d2da7fb5653da, type: 3}
+  speed: 5
 --- !u!50 &4356733298296207483
 Rigidbody2D:
   serializedVersion: 4

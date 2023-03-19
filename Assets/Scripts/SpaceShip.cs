@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SpaceShip : MonoBehaviour
 {
+    public AudioSource explosionAudio;
+
     private bool canMove = true;
     public GameObject explosion;
     private const string ENEMY_TAG = "Enemy";
@@ -12,6 +14,7 @@ public class SpaceShip : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class SpaceShip : MonoBehaviour
 
     public void updatePosition()
     {
+        
         Vector2 originalPosition = transform.position;
 
         // Place Player on new position
@@ -66,11 +70,14 @@ public class SpaceShip : MonoBehaviour
         }
     
         transform.position = correctedPosition;
+        
    }
 
    private void OnTriggerEnter2D(Collider2D other) {
+
     GameObject explosion = Instantiate( this.explosion );
     explosion.transform.position = transform.position;
+
     if( other.CompareTag( ENEMY_TAG ) )
     {
         canMove = false;
